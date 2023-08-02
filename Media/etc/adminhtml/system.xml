@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="gtech" translate="label" sortOrder="250">
+            <label>GTECH</label>
+        </tab>
+        <section id="gtech_media" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>gtech-separator</class>
+            <label>Media</label>
+            <tab>gtech</tab>
+            <resource>Gtech_Media::config_demo</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="social_link" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Social Link</label>
+                    <comment>This is Social Link</comment>
+                </field>
+            </group>
+
+            <group id="storefront" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Store Front</label>
+                <field id="media_link" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Media Link</label>
+                    <comment>This is Media Link</comment>
+                </field>
+                <field id="set_limit" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Limit</label>
+                    <comment>Set Number of Limit to  Show Media </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Gtech\Media\Api\Data\AllmediaInterface" type="Gtech\Media\Model\Allmedia" />
+	<preference for="Gtech\Media\Api\AllmediaRepositoryInterface" type="Gtech\Media\Model\AllmediaRepository" />
+    <virtualType name="AllmediaGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Gtech\Media\Model\ResourceModel\Allmedia\Collection</argument>
+        </arguments>
+    </virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                  <item name="media_allmedia_listing_data_source" xsi:type="string">Gtech\Media\Model\ResourceModel\Allmedia\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Gtech\Media\Model\ResourceModel\Allmedia\Grid\Collection">
+        <arguments>
+             <argument name="mainTable" xsi:type="string">gtech_media</argument>
+             <argument name="eventPrefix" xsi:type="string">gtech_media_grid_collection</argument>
+             <argument name="eventObject" xsi:type="string">gtech_media_collection</argument>
+             <argument name="resourceModel" xsi:type="string">Gtech\Media\Model\ResourceModel\Allmedia</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Gtech\Media\Api\Data\AllmediaInterface" xsi:type="string">Gtech\Media\Api\AllmediaRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

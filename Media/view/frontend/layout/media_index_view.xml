@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Gtech_Media::css/gtech.media.css" />
+	</head>
+	<body>
+        <referenceContainer name="content">
+            <block class="Gtech\Media\Block\SingleMedia" name="list_media" template="Gtech_Media::singlemedia.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,94 @@
+<?php
+namespace Gtech\Media\Controller\Adminhtml\Allmedia;
+
+use Magento\Backend\App\Action\Context;
+use Gtech\Media\Api\AllmediaRepositoryInterface as AllmediaRepository;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Gtech\Media\Api\Data\AllmediaInterface;
+
+class InlineEdit extends \Magento\Backend\App\Action
+{
+    protected $allmediaRepository;
+
+    /**
+     * @var \Magento\Framework\Controller\Result\JsonFactory
+     */
+    protected $jsonFactory;
+
+    public function __construct(
+        Context $context,
+        AllmediaRepository $allmediaRepository,
+        JsonFactory $jsonFactory
+    ) {
+        parent::__construct($context);
+        $this->allmediaRepository = $allmediaRepository;
+        $this->jsonFactory = $jsonFactory;
+    }
+	
+	/**
+     * Authorization level
+     *
+     * @see _isAllowed()
+     */
+	protected function _isAllowed()
+	{
+		return $this->_authorization->isAllowed('Gtech_Media::save');
+	}
+
+    /**
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
+    public function execute()
+    {
+        /** @var \Magento\Framework\Controller\Result\Json $resultJson */
+        $resultJson = $this->jsonFactory->create();
+        $error = false;
+        $messages = [];
+
+        $postItems = $this->getRequest()->getParam('items', []);
+        if (!($this->getRequest()->getParam('isAjax') && count($postItems))) {
+            return $resultJson->setData([
+                'messages' => [__('Please correct the data sent.')],
+                'error' => true,
+            ]);
+        }
+
+        foreach (array_keys($postItems) as $mediaId) {
+            $media = $this->allmediaRepository->getById($mediaId);
+            try {
+                $mediaData = $postItems[$mediaId];
+                $extendedMediaData = $media->getData();
+                $this->setMediaData($media, $extendedMediaData, $mediaData);
+                $this->allmediaRepository->save($media);
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $messages[] = $this->getErrorWithMediaId($media, $e->getMessage());
+                $error = true;
+            } catch (\RuntimeException $e) {
+                $messages[] = $this->getErrorWithMediaId($media, $e->getMessage());
+                $error = true;
+            } catch (\Exception $e) {
+                $messages[] = $this->getErrorWithMediaId(
+                    $media,
+                    __('Something went wrong while saving the media.')
+                );
+                $error = true;
+            }
+        }
+
+        return $resultJson->setData([
+            'messages' => $messages,
+            'error' => $error
+        ]);
+    }
+
+    protected function getErrorWithMediaId(AllmediaInterface $media, $errorText)
+    {
+        return '[Media ID: ' . $media->getId() . '] ' . $errorText;
+    }
+
+    public function setMediaData(\Gtech\Media\Model\Allmedia $media, array $extendedMediaData, array $mediaData)
+    {
+        $media->setData(array_merge($media->getData(), $extendedMediaData, $mediaData));
+        return $this;
+    }
+}

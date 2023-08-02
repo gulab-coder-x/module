@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <gtech_media>
+            <general>
+                <enable>1</enable>
+                <social_link>Youtube</social_link>
+            </general>
+            <storefront>
+                <media_link>Latest Media</media_link>
+                <set_limit>10</set_limit>
+            </storefront>
+        </gtech_media>
+    </default>
+</config>    
+
+

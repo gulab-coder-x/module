@@ -1,0 +1,35 @@
+.gtech-media .gth-media-list {
+	padding: 15px;
+	border: 1px solid #ccc;
+	display: block;
+	margin-top: -1px;
+}
+.gtech-media .gth-media-list:nth-child(even){
+	background-color:#f1f1f1;
+}
+.gtech-media .gth-media-list:nth-child(odd){
+	background-color:#FAFAFA;
+}
+.gtech-media .gth-media-title {
+	font-weight:bold;
+	font-size:16px;
+	margin-bottom:5px;
+}
+.gtech-media .gth-media-time {
+	font-size:14px;
+	color:#666;
+	font-style:italic;
+}
+.gtech-media .pager {
+	margin-top:20px;
+	display:flex;
+}
+.gtech-media .toolbar-amount {
+	margin-right:20px;
+}
+.gtech-media .gth-media-desc {
+	margin-top:15px;
+}
+.gtech-media a:hover {
+	text-decoration:none;
+}

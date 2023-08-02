@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+	  <add id="Gtech_Media::gtech" title="GTECH" translate="title" module="Gtech_Media" sortOrder="80" dependsOnModule="Gtech_Media" resource="Gtech_Media::gtech"/>
+	  <add id="Gtech_Media::media" title="Media" translate="title" module="Gtech_Media" parent="Gtech_Media::gtech" sortOrder="50" dependsOnModule="Gtech_Media" resource="Gtech_Media::media"/>
+	  <add id="Gtech_Media::media_allmedia" title="All Media" translate="title" module="Gtech_Media" parent="Gtech_Media::media" sortOrder="10" dependsOnModule="Gtech_Media"
+       action="media/allmedia" resource="Gtech_Media::media_allmedia"/>
+	  <add id="Gtech_Media::settings" title="Settings" translate="title" module="Gtech_Media" parent="Gtech_Media::gtech" sortOrder="60" dependsOnModule="Gtech_Media" resource="Gtech_Media::settings"/>
+	   <add id="Gtech_Media::media_config" title="Configuration" translate="title" module="Gtech_Media" parent="Gtech_Media::settings" sortOrder="10" dependsOnModule="Gtech_Media"
+       action="adminhtml/system_config/edit/section/gtech_media" resource="Gtech_Media::media_config"/>
+	</menu>
+</config>
+
+
+
+          

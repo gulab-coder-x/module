@@ -1,0 +1,24 @@
+<div class="gtech-media">
+	<?php $allmedia = $this->getListMedia() ?>
+	<?php if($allmedia && count($allmedia)>0): ?>
+		<?php foreach($allmedia as $media): ?>
+			<div class="gth-media-list">
+				<div class="gth-media-title">
+                <a href="<?php echo $block->getBaseUrl() ?>media/index/view/?id=<?php echo $media->getId()?>">
+						<?php echo $media->getTitle() ?>
+					</a>
+					</div>
+				<div class="gth-media-time"><?php echo $media->getCreatedAt() ?></div>
+				<div class="gth-media-desc"><?php echo $media->getDescription() ?></div>
+			</div>
+		<?php endforeach; ?>
+		
+		<?php if($this->getPagerHtml()): ?>
+			<?php echo $this->getPagerHtml(); ?>
+		<?php endif; ?>
+	<?php else: ?>
+		<div class="gtech-no-records">
+			<?php echo __('Media not available'); ?>
+		</div>
+	<?php endif; ?>
+</div>
